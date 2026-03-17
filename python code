@@ -1,0 +1,64 @@
+# Function to determine the grade based on marks
+def get_grade(score):
+    if score >= 85:
+        return "A"
+    elif score >= 70:
+        return "B"
+    elif score >= 60:
+        return "C"
+    elif score >= 50:
+        return "D"
+    elif score >= 41:
+        return "E"
+    else:
+        return "F"
+
+# Data Setup
+subjects = [
+    "Malay Language", "Chinese Language", "English Language", 
+    "Mathematics", "Science", "History", "Geography", 
+    "Moral Education", "Computer Science/RBT", "Art"
+]
+weights = [6, 6, 5, 5, 5, 3, 3, 3, 3, 2]
+
+run = True
+while run:
+    marks = []
+    student_grades = []
+    total_weighted_score = 0
+    total_weights = sum(weights)
+
+    print("\n--- Student Grade Entry ---")
+    
+    # i) Input Section
+    for i in range(len(subjects)):
+        # Getting user input for each subject
+        score = float(input(f"Enter marks for {subjects[i]}: "))
+        marks.append(score)
+        
+        # ii) Process Section
+        # Calculate grade and store it
+        grade = get_grade(score)
+        student_grades.append(grade)
+        
+        # Calculate weighted average component
+        total_weighted_score += (score * weights[i])
+
+    weighted_average = total_weighted_score / total_weights
+
+    # Output Section
+    print("\n===============================")
+    print(f"{'Subject':<20} : {'Grade'}")
+    print("-------------------------------")
+    
+    for i in range(len(subjects)):
+        print(f"{subjects[i]:<20} : {student_grades[i]}")
+        
+    print("-------------------------------")
+    print(f"Weighted Average: {round(weighted_average, 2)}")
+    print("===============================\n")
+
+    # Option to exit the loop
+    cont = input("Do you want to calculate for another student? (y/n): ")
+    if cont.lower() != 'y':
+        run = False
